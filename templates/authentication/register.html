@@ -1,0 +1,54 @@
+{% extends "base_auth.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<br><br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-title py-3">
+                    <h4 class="text-center">Register for free account</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'register' %}" method="POST">
+                        {% csrf_token %}
+                        {% include 'partials/_message.html' %}
+
+                        <div class="form-group">
+                            <label>Enter Username</label>
+                            <input type="text" name="username" placeholder="username" id="usernameField"
+                                class="form-control form-control-sm" value="{{Fieldvalue.username}}" />
+                        </div>
+                        <div class="invalid_feedback text-danger pt-2" style="display: none"></div>
+                        <!-- <p class="text-success usernamecheck" style="display: none;"></p> -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" name="email" class="form-control" id="emailField"
+                                aria-describedby="emailHelp" placeholder="Enter email" value="{{Fieldvalue.email}}">
+                        </div>
+                        <div class="email_feedback text-danger pt-2" style="display: none"></div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" name="password" class="form-control" id="passwordField"
+                                placeholder="Password">
+                            <small class="float-end py-3 showpasswordToggle" style="cursor: pointer;">SHOW</small>
+                        </div>
+                        <br>
+                        <button type="submit" style="display: block; width: 100%;"
+                            class="btn btn-primary btn-sm btn-block submit-btn">Submit</button>
+                    </form>
+                    <div class="container">
+                        <span class="text-lead lead">Already have an account? </span><a href="{% url 'login' %}">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock content %}

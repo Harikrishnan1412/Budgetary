@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h5 class="text-center">Expenses VS Income</h5><br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-title mt-1 pl-1 text-center">
+                    This week <i class="bi bi-cash"></i>
+                </div>
+                <div class="card-body">
+                    <p class="text-center" style="font-size: 30;">{{expenses_week}}/{{income_week}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-title mt-1 pl-2 text-center">
+                    This Month <i class="bi bi-cash"></i>
+                </div>
+                <div class="card-body">
+                    <p class="text-center" style="font-size: 30;">{{expenses_month}}/{{income_month}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-title mt-1 pl-2 text-center">
+                    Six Month <i class="bi bi-cash"></i>
+                </div>
+                <div class="card-body">
+                    <p class="text-center" style="font-size: 30;">{{expenses_six_month}}/{{income_six_month}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-title mt-1 pl-2 text-center">
+                    This Year <i class="bi bi-cash"></i>
+                </div>
+                <div class="card-body">
+                    <p class="text-center" style="font-size: 30;">{{expenses_year}}/{{income_year}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Expenses table -->
+<br>
+<div class="container">
+    {% if expenses.count %}
+    <hr>
+    <h5>Expense Table</h5>
+    <div class="row">
+        <div class="col-md-8">
+            <!-- <div class="form-group">
+                <input type="text" class="form-control" id="searchField" placeholder="Search">
+            </div> -->
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'export_xls' %}" class="btn btn-primary">Export EXCEL</a>&nbsp;&nbsp;
+            <a href="{% url 'export_csv' %}" class="btn btn-secondary">Export CSV</a>
+        </div>
+    </div>
+    <div class="app-table">
+        <table class="table table-stripped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Amount ({{currency}})</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in page_obj_expense %}
+                <tr>
+                    <td>{{expense.amount}}</td>
+                    <td>{{expense.category}}</td>
+                    <td>{{expense.description}}</td>
+                    <td>{{expense.date}}</td>
+                    <td><a href="{% url 'expense-edit' expense.id %}" class="btn btn-secondary btn-sm">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'expenses' %}" class="float-end">show more...</a>
+</div>
+{% endif %}
+<!-- End of Expenses -->
+
+
+<!-- Income Table -->
+<br>
+<div class="container">
+    {% if incomes.count %}
+    <hr>
+    <h5>Income Table</h5>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <a href="{% url 'userincome:export_xls' %}" class="btn btn-primary">Export EXCEL</a>&nbsp;&nbsp;
+                <a href="{% url 'userincome:export_csv' %}" class="btn btn-secondary">Export CSV</a>
+            </div>
+        </div>
+    </div>
+    <div class="app-table">
+        <table class="table table-stripped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Amount ({{currency}})</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for income in page_obj_income %}
+                <tr>
+                    <td>{{income.amount}}</td>
+                    <td>{{income.source}}</td>
+                    <td>{{income.description}}</td>
+                    <td>{{income.date}}</td>
+                    <td><a href="{% url 'userincome:income-edit' income.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'userincome:income_list' %}" class="float-end">show more...</a>
+</div>
+<br><br>
+{% endif %}
+<!-- End of income table -->
+
+{% endblock %}

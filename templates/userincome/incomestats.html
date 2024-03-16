@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    {% include 'partials/_message.html' %}
+    <div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'userincome:income_list' %}">Income Summary</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Summary</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'userincome:income_list' %}" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+    <!-- <h2 class="text-center"> Expenses List </h2><hr><br> -->
+<hr>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/incomestats.js' %}"></script>
+
+</div>
+
+
+{% endblock content %}

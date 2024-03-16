@@ -1,0 +1,17 @@
+
+#branding h1{
+    color: rgba(255, 0, 0, 0.601);
+    font-weight: bold;
+}
+
+.login .submit-row{
+    padding: 0px;
+}
+
+input[type=submit], input[type=button], .submit-row input{
+    width: 100%;
+}
+
+#toolbar form input[type="submit"]{
+    width: 20%;
+}
